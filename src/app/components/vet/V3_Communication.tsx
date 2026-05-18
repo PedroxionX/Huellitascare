@@ -9,8 +9,8 @@ export function V3_Communication() {
   return (
     <WireShell
       title="Canal de comunicación"
-      screenNum={3}
-      totalScreens={6}
+      screenNum={4}
+      totalScreens={7}
       persona="vet"
       backPath="/vet/diagnosis"
       nextPath="/vet/education"

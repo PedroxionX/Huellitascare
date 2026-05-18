@@ -1,15 +1,25 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Search } from 'lucide-react';
+import { Search, ChevronDown, ChevronUp } from 'lucide-react';
 import { WireShell } from '../wire/WireShell';
 import { WireCard, WireSection, WireBtn } from '../wire/WireElements';
 import { WF } from '../wire/wf';
 
-const SYMPTOMS = [
-  'Vómito', 'Diarrea', 'No come', 'Letargo', 'Convulsiones',
-  'Dificultad al respirar', 'Sangrado', 'Cojea', 'No bebe agua',
-  'Temblores', 'Hinchazón', 'Secreción ocular',
-];
+const SYMPTOM_CATEGORIES = {
+  digestivo: ['Vómito', 'Diarrea', 'No come', 'No bebe agua', 'Hinchazón abdominal'],
+  respiratorio: ['Dificultad al respirar', 'Tos', 'Estornudos', 'Secreción nasal'],
+  conducta: ['Letargo', 'Agresividad', 'Desorientación', 'Temblores'],
+  piel: ['Rascado excesivo', 'Pérdida de pelo', 'Heridas', 'Erupciones'],
+  otros: ['Convulsiones', 'Sangrado', 'Cojea', 'Secreción ocular', 'Fiebre'],
+};
+
+const CATEGORY_LABELS = {
+  digestivo: 'Digestivo',
+  respiratorio: 'Respiratorio',
+  conducta: 'Conducta',
+  piel: 'Piel y pelaje',
+  otros: 'Otros síntomas',
+};
 
 const PETS = ['Luna 🐕', 'Milo 🐈', 'Rocky 🐶'];
 
@@ -17,9 +27,15 @@ export function A2_SymptomSelector() {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string[]>(['Vómito', 'Letargo']);
   const [pet, setPet] = useState('Luna 🐕');
+  const [expandedCategories, setExpandedCategories] = useState<string[]>(['digestivo', 'conducta']);
 
   const toggle = (s: string) =>
     setSelected((prev) => prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]);
+
+  const toggleCategory = (cat: string) =>
+    setExpandedCategories((prev) =>
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+    );
 
   return (
     <WireShell
@@ -60,22 +76,45 @@ export function A2_SymptomSelector() {
         </div>
       </div>
 
-      {/* Symptom grid */}
+      {/* Categorized symptoms */}
       <WireSection label="Selecciona los síntomas que notas" />
-      <div className="px-4 pb-3 flex flex-wrap gap-2">
-        {SYMPTOMS.map((s) => (
-          <button
-            key={s}
-            onClick={() => toggle(s)}
-            className="px-3 py-2 rounded-xl text-xs font-semibold border transition-all"
-            style={{
-              backgroundColor: selected.includes(s) ? WF.angel : WF.card,
-              color: selected.includes(s) ? '#fff' : WF.textSec,
-              borderColor: selected.includes(s) ? WF.angel : WF.border,
-            }}
-          >
-            {s}
-          </button>
+      <div className="px-4 pb-3 space-y-2">
+        {Object.entries(SYMPTOM_CATEGORIES).map(([category, symptoms]) => (
+          <WireCard key={category}>
+            <button
+              onClick={() => toggleCategory(category)}
+              className="w-full flex items-center justify-between p-3"
+              style={{ backgroundColor: WF.card }}
+            >
+              <span className="font-semibold text-sm" style={{ color: WF.text }}>
+                {CATEGORY_LABELS[category as keyof typeof CATEGORY_LABELS]}
+              </span>
+              {expandedCategories.includes(category) ? (
+                <ChevronUp size={16} style={{ color: WF.muted }} />
+              ) : (
+                <ChevronDown size={16} style={{ color: WF.muted }} />
+              )}
+            </button>
+
+            {expandedCategories.includes(category) && (
+              <div className="px-3 pb-3 flex flex-wrap gap-2">
+                {symptoms.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => toggle(s)}
+                    className="px-3 py-2 rounded-xl text-xs font-semibold border transition-all"
+                    style={{
+                      backgroundColor: selected.includes(s) ? WF.angel : WF.card,
+                      color: selected.includes(s) ? '#fff' : WF.textSec,
+                      borderColor: selected.includes(s) ? WF.angel : WF.border,
+                    }}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            )}
+          </WireCard>
         ))}
       </div>
 

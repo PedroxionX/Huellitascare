@@ -23,6 +23,7 @@ import { P8_NewPet } from './components/paola/P8_NewPet';
 
 // Vet flow (Angélica)
 import { V1_PatientHistory } from './components/vet/V1_PatientHistory';
+import { V2_GuidedQuestionnaire } from './components/vet/V2_GuidedQuestionnaire';
 import { V2_Diagnosis } from './components/vet/V2_Diagnosis';
 import { V3_Communication } from './components/vet/V3_Communication';
 import { V4_OwnerEducation } from './components/vet/V4_OwnerEducation';
@@ -52,8 +53,9 @@ export const router = createBrowserRouter([
   { path: '/paola/reminder', Component: P7_ReminderConfirm },
   { path: '/paola/new-pet', Component: P8_NewPet },
 
-  // Vet (Angélica) — 6 screens
+  // Vet (Angélica) — 7 screens
   { path: '/vet', Component: V1_PatientHistory },
+  { path: '/vet/questionnaire', Component: V2_GuidedQuestionnaire },
   { path: '/vet/diagnosis', Component: V2_Diagnosis },
   { path: '/vet/communication', Component: V3_Communication },
   { path: '/vet/education', Component: V4_OwnerEducation },

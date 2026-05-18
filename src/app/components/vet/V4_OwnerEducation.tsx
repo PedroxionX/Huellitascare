@@ -9,8 +9,8 @@ export function V4_OwnerEducation() {
   return (
     <WireShell
       title="Educación al dueño"
-      screenNum={4}
-      totalScreens={6}
+      screenNum={5}
+      totalScreens={7}
       persona="vet"
       backPath="/vet/communication"
       nextPath="/vet/prescription"

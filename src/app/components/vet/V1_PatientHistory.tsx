@@ -10,10 +10,10 @@ export function V1_PatientHistory() {
     <WireShell
       title="Historial médico del paciente"
       screenNum={1}
-      totalScreens={6}
+      totalScreens={7}
       persona="vet"
       backPath="/"
-      nextPath="/vet/diagnosis"
+      nextPath="/vet/questionnaire"
     >
       {/* Patient info */}
       <WireSection label="Datos del paciente" />
@@ -27,6 +27,19 @@ export function V1_PatientHistory() {
           </div>
         </div>
       </WireCard>
+
+      {/* Tabs */}
+      <div className="flex gap-0 px-4 mb-3 border-b" style={{ borderColor: WF.border }}>
+        <button className="flex-1 py-3 text-sm font-semibold border-b-2 transition-colors" style={{ borderColor: WF.vet, color: WF.vet }}>
+          Resumen
+        </button>
+        <button className="flex-1 py-3 text-sm font-semibold border-b-2 transition-colors" style={{ borderColor: 'transparent', color: WF.textSec }}>
+          Historial completo
+        </button>
+        <button className="flex-1 py-3 text-sm font-semibold border-b-2 transition-colors" style={{ borderColor: 'transparent', color: WF.textSec }}>
+          Medicamentos activos
+        </button>
+      </div>
 
       {/* Previous consultations */}
       <WireSection label="Consultas anteriores" />
@@ -101,7 +114,7 @@ export function V1_PatientHistory() {
       {/* CTA */}
       <div className="px-4 mt-4">
         <button
-          onClick={() => navigate('/vet/diagnosis')}
+          onClick={() => navigate('/vet/questionnaire')}
           className="w-full rounded-xl p-4 flex items-center justify-between"
           style={{ backgroundColor: WF.vet, color: '#fff' }}
         >

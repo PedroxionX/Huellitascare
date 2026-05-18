@@ -9,8 +9,8 @@ export function V2_Diagnosis() {
   return (
     <WireShell
       title="Diagnóstico y consulta"
-      screenNum={2}
-      totalScreens={6}
+      screenNum={3}
+      totalScreens={7}
       persona="vet"
       backPath="/vet"
       nextPath="/vet/communication"

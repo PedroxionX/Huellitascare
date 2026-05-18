@@ -9,8 +9,8 @@ export function V6_TreatmentGuide() {
   return (
     <WireShell
       title="Guía de tratamiento"
-      screenNum={6}
-      totalScreens={6}
+      screenNum={7}
+      totalScreens={7}
       persona="vet"
       backPath="/vet/prescription"
       nextPath="/"

@@ -9,8 +9,8 @@ export function V5_Prescription() {
   return (
     <WireShell
       title="Receta / Prescripción digital"
-      screenNum={5}
-      totalScreens={6}
+      screenNum={6}
+      totalScreens={7}
       persona="vet"
       backPath="/vet/diagnosis"
       nextPath="/vet/treatment"
